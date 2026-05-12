@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block sitetitle %}Dashboard{% endblock %}
+{% block content %}
+    <h1 class="title">Welcome, {{ username }}!</h1>
+    <p class="subtitle">What would you like to do today?</p>
+    <div class="dashboard_grid">
+        <a href="{{ url_for('todo') }}" class="dashboard_card">
+            <h2>&#9989; To-Do List</h2>
+            <p>Manage your tasks and deadlines</p>
+        </a>
+        <a href="{{ url_for('blog') }}" class="dashboard_card">
+            <h2>&#128221; Blog</h2>
+            <p>Write and share learning experiences</p>
+        </a>
+        <a href="{{ url_for('upload') }}" class="dashboard_card">
+            <h2>&#128248; Upload Notes</h2>
+            <p>Store and organize your note images</p>
+        </a>
+    </div>
+    <div class="logout_div">
+        <a href="{{ url_for('logout') }}" class="btn_logout">Logout</a>
+    </div>
+{% endblock %}

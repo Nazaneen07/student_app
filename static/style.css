@@ -1,0 +1,118 @@
+* { box-sizing: border-box; }
+body { font-family: Arial; }
+
+.maincontainer {
+    background-color: aliceblue;
+    width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 8px;
+}
+.footer {
+    background-color: rgb(10, 10, 10);
+    color: aliceblue;
+    padding: 2rem;
+    text-align: center;
+}
+/* ----------------
+   TYPOGRAPHY
+---------------- */
+.title {
+    text-align: center;
+    color: darkblue;
+}
+.subtitle {
+    text-align: center;
+    color: rgb(70, 70, 70);
+}
+/* ----------------
+   FORM STYLES
+---------------- */
+.form_section {
+    margin-bottom: 1rem;
+}
+.form_section input {
+    padding: 0.5rem;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid darkblue;
+    background: transparent;
+    font-size: 1rem;
+}
+/* ----------------
+   BUTTONS
+---------------- */
+.btn_login, .btn_signup, .btn_logout, .btn_back {
+    background-color: darkblue;
+    color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    transition: ease 500ms;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.btn_login:hover, .btn_signup:hover, .btn_logout:hover, .btn_back:hover {
+    background-color: crimson;
+    font-weight: bolder;
+}
+/* ----------------
+   SIGN UP / BACK LINKS
+---------------- */
+.signup_div {
+    margin-top: 3rem;
+    color: darkblue;
+}
+.signup_div a {
+    color: forestgreen;
+    font-size: 1.1rem;
+}
+.signup_div a:hover {
+    color: crimson;
+}
+.logout_div {
+    margin-top: 2rem;
+    text-align: center;
+}
+.back_div {
+    margin-top: 2rem;
+}
+/* ----------------
+   FLASH MESSAGES
+---------------- */
+.flash_msg {
+    color: crimson;
+}
+/* ----------------
+   DASHBOARD GRID
+---------------- */
+.dashboard_grid {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+.dashboard_card {
+    background-color: white;
+    border: 2px solid darkblue;
+    border-radius: 8px;
+    padding: 1.5rem;
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+    text-decoration: none;
+    color: darkblue;
+    transition: ease 500ms;
+}
+.dashboard_card:hover {
+    background-color: darkblue;
+    color: whitesmoke;
+}
+.dashboard_card p {
+    color: rgb(70, 70, 70);
+    font-size: 0.9rem;
+}
+.dashboard_card:hover p {
+    color: aliceblue;
+}

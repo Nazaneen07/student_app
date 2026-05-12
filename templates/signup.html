@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block sitetitle %}Sign Up{% endblock %}
+{% block content %}
+    <h1 class="title">Create an Account</h1>
+    <form method="post" class="login_form" onsubmit="return validatePassword()">
+        <section class="form_section">
+            <input type="text" name="username" placeholder="Enter username..." required/>
+        </section>
+        <section class="form_section">
+            <input type="email" name="email" placeholder="Type email..." required/>
+        </section>
+        <section class="form_section">
+            <input type="password" name="password" placeholder="Enter password..."/>
+        </section>
+        <button type="submit" class="btn_signup">Sign-up</button>
+    </form>
+    <div class="signup_div">
+        <p>Already have an account? <a href="{{ url_for('login') }}">Log-in</a></p>
+    </div>
+    <!-- display the flash message -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p class="flash_msg">{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+{% endblock %}

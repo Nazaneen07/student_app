@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block sitetitle %}To-Do List{% endblock %}
+{% block content %}
+    <h1 class="title">To-Do List</h1>
+    <p class="subtitle">Coming soon &mdash; task management feature</p>
+    <div class="back_div">
+        <a href="{{ url_for('dashboard') }}" class="btn_back">&#8592; Back to Dashboard</a>
+    </div>
+{% endblock %}
