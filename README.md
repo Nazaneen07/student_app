@@ -1,16 +1,11 @@
-# ET721 Final Project — Student Learning Management App
-**By Nazaneen Baguaei | Spring 2026 | Queensborough Community College**
+# Student Learning Management App
+**Nazaneen Baguaei | Spring 2026 | Queensborough Community College | ET721**
 
 ---
 
 ## Introduction
 
-The Student Learning Management App is a full-stack web application built using the Flask framework. The purpose of this application is to enhance students' productivity and improve their overall learning experience.
-
-The platform provides a user-friendly interface that integrates essential academic tools:
-- A **task management (To-Do List)** system for tracking assignments and deadlines
-- A **blogging platform** for sharing learning experiences and study tips
-- An **image upload feature** for storing and organizing handwritten or digital notes
+This is a full-stack web application built with Flask that helps students stay on top of their academic life. It brings together three core tools: a to-do list for tracking tasks and deadlines, a blog for writing about learning experiences, and an image upload section for storing and organizing notes.
 
 ---
 
@@ -31,6 +26,8 @@ ET721_project_student_app/
     ├── dashboard.html
     ├── todo.html
     ├── blog.html
+    ├── new_post.html
+    ├── view_post.html
     └── upload.html
 ```
 
@@ -39,85 +36,70 @@ ET721_project_student_app/
 ## File Descriptions
 
 ### `app.py`
-The main Flask application file. Contains all route definitions, database connection logic, and session management.
+The main application file. Handles all routes, database logic, session management, and file uploads.
 
 ### `flask_db.db`
-The SQLite database file. Stores all user accounts, tasks, blog posts, and uploaded image records.
+The SQLite database. Stores users, tasks, blog posts, comments, likes, and uploaded image records.
 
----
-
-### `static/` Folder
+### `static/`
 
 | File | Description |
 |------|-------------|
-| `style.css` | Main stylesheet for the entire application. Controls layout, colors, buttons, forms, and responsive design. |
-| `script.js` | JavaScript file for client-side functionality, including password validation on login and signup forms. |
+| `style.css` | Stylesheet for the entire app — layout, colors, buttons, forms, and responsive design. |
+| `script.js` | Handles client-side behavior including the image upload fetch request and form validation. |
 
----
-
-### `templates/` Folder
+### `templates/`
 
 | File | Description |
 |------|-------------|
-| `base.html` | Base template that all other pages extend. Contains the shared HTML structure, navigation, footer, and links to CSS and JS files. |
-| `login.html` | Login page where users enter their email and password to access the app. |
-| `signup.html` | Signup page where new users create an account with a username, email, and password. |
-| `dashboard.html` | Main landing page after login. Displays the user's name and navigation cards linking to the To-Do List, Blog, and Upload features. |
-| `todo.html` | To-Do List page where users can create, update, delete, and mark tasks as completed. |
-| `blog.html` | Blog page where users can write and publish posts about their learning experiences. |
-| `upload.html` | Image upload page where users can upload, preview, and download images of their notes. |
+| `base.html` | Shared layout that all pages extend. Includes navigation, footer, and links to CSS and JS. |
+| `login.html` | Login page where users enter their email and password. |
+| `signup.html` | Registration page for creating a new account. |
+| `dashboard.html` | Landing page after login. Shows the user's name and links to all features. |
+| `todo.html` | To-Do List page for creating, completing, and deleting tasks with categories and due dates. |
+| `blog.html` | Blog feed showing all published posts with like and comment counts. |
+| `new_post.html` | Form for writing and publishing a new blog post. |
+| `view_post.html` | Individual post page with full content, comments, and a like button. |
+| `upload.html` | Notes gallery where users can upload, preview, download, and delete images. |
 
 ---
 
-## Routes Defined in `app.py`
+## Routes
 
 | Route | Method | Description |
 |-------|--------|-------------|
-| `/` | GET | Redirects to the login page |
-| `/login` | GET, POST | Displays login form; authenticates user and starts session |
-| `/signup` | GET, POST | Displays signup form; creates new user in the database |
-| `/dashboard` | GET | Displays the main dashboard (requires login) |
-| `/todo` | GET | Displays the To-Do List page (requires login) |
-| `/blog` | GET | Displays the Blog page (requires login) |
-| `/upload` | GET | Displays the Image Upload page (requires login) |
+| `/` | GET | Redirects to login |
+| `/login` | GET, POST | Authenticates user and starts session |
+| `/signup` | GET, POST | Creates a new user account |
+| `/dashboard` | GET | Main dashboard (login required) |
+| `/todo` | GET | Displays the task list |
+| `/todo/add` | POST | Adds a new task |
+| `/todo/complete/<id>` | GET | Marks a task as completed |
+| `/todo/delete/<id>` | GET | Deletes a task |
+| `/blog` | GET | Displays all blog posts |
+| `/blog/new` | GET, POST | Form to write and publish a new post |
+| `/blog/post/<id>` | GET | Displays a single post with comments |
+| `/blog/comment/<id>` | POST | Adds a comment to a post |
+| `/blog/like/<id>` | GET | Toggles a like on a post |
+| `/upload` | GET | Displays the notes gallery |
+| `/upload/image` | POST | Handles image file upload |
+| `/upload/delete/<id>` | GET | Deletes an uploaded image |
 | `/logout` | GET | Clears session and redirects to login |
 
 ---
 
 ## Setup and Installation
 
-### Requirements
-- Python 3.x
-- Flask
+**Requirements:** Python 3.x, Flask
 
-### Install Dependencies
 ```bash
 pip install flask
 ```
 
-### Initialize the Database
-Run this once in the terminal before starting the app:
+To run the app:
+
 ```bash
-python -c "
-import sqlite3
-conn = sqlite3.connect('flask_db.db')
-conn.execute('''CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL
-)''')
-conn.commit()
-conn.close()
-print('Database ready!')
-"
+python app.py
 ```
 
-
----
-
-## Tech Stack
-
-- **Backend:** Flask (Python)
-- **Frontend:** HTML, CSS, JavaScript
-- **Database:** SQLite
+The database is created automatically on first run. The app will be available at `http://127.0.0.1:5000`.

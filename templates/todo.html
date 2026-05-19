@@ -1,8 +1,61 @@
 {% extends 'base.html' %}
 {% block sitetitle %}To-Do List{% endblock %}
 {% block content %}
-    <h1 class="title">To-Do List</h1>
-    <p class="subtitle">Coming soon &mdash; task management feature</p>
+    <h1 class="title">&#9989; To-Do List</h1>
+    <p class="subtitle">Hello, {{ username }}! Here are your tasks.</p>
+
+    <!-- add task form -->
+    <form method="post" action="{{ url_for('add_task') }}" class="todo_form">
+        <section class="form_section">
+            <input type="text" name="title" placeholder="Enter task title..." required/>
+        </section>
+        <section class="form_row">
+            <select name="category" class="form_select">
+                <option value="academic">Academic</option>
+                <option value="personal">Personal</option>
+                <option value="deadline">Deadline</option>
+            </select>
+            <input type="date" name="due_date" class="form_date"/>
+            <button type="submit" class="btn_login">Add Task</button>
+        </section>
+    </form>
+
+    <!-- flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p class="flash_msg">{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- task list -->
+    <div class="task_list">
+        {% if tasks %}
+            {% for task in tasks %}
+                <div class="task_card {% if task.completed %}task_done{% endif %}">
+                    <div class="task_info">
+                        <span class="task_title">{{ task.title }}</span>
+                        <span class="task_badge">{{ task.category }}</span>
+                        {% if task.due_date %}
+                            <span class="task_due">Due: {{ task.due_date }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="task_actions">
+                        {% if not task.completed %}
+                            <a href="{{ url_for('complete_task', task_id=task.id) }}" class="btn_complete">&#10003; Done</a>
+                        {% else %}
+                            <span class="task_completed_label">&#10003; Completed</span>
+                        {% endif %}
+                        <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn_delete">&#128465; Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no_items">No tasks yet — add one above!</p>
+        {% endif %}
+    </div>
+
     <div class="back_div">
         <a href="{{ url_for('dashboard') }}" class="btn_back">&#8592; Back to Dashboard</a>
     </div>

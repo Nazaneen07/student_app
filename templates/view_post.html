@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block sitetitle %}{{ post.title }}{% endblock %}
+{% block content %}
+    <!-- post -->
+    <div class="post_full">
+        <div class="blog_card_header">
+            <h1 class="title">{{ post.title }}</h1>
+            <span class="task_badge">{{ post.category }}</span>
+        </div>
+        <p class="blog_card_meta">By {{ post.username }} &mdash; {{ post.created_at[:10] }}</p>
+        <p class="post_content">{{ post.content }}</p>
+
+        <!-- like button -->
+        <div class="like_div">
+            <a href="{{ url_for('like_post', post_id=post.id) }}" class="btn_like">&#10084; Like ({{ post.like_count }})</a>
+        </div>
+    </div>
+
+    <!-- comments section -->
+    <div class="comments_section">
+        <h2 class="subtitle">&#128172; Comments ({{ comments|length }})</h2>
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment_card">
+                    <p class="comment_author">{{ comment.username }} &mdash; <span class="comment_date">{{ comment.created_at[:10] }}</span></p>
+                    <p class="comment_body">{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no_items">No comments yet — be the first!</p>
+        {% endif %}
+
+        <!-- add comment form -->
+        <form method="post" action="{{ url_for('add_comment', post_id=post.id) }}" class="login_form">
+            <section class="form_section">
+                <input type="text" name="content" placeholder="Write a comment..." required/>
+            </section>
+            <button type="submit" class="btn_signup">Post Comment</button>
+        </form>
+    </div>
+
+    <div class="back_div">
+        <a href="{{ url_for('blog') }}" class="btn_back">&#8592; Back to Blog</a>
+    </div>
+{% endblock %}

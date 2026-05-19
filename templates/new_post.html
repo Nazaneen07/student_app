@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block sitetitle %}New Post{% endblock %}
+{% block content %}
+    <h1 class="title">&#128221; Write a New Post</h1>
+    <form method="post" class="login_form">
+        <section class="form_section">
+            <input type="text" name="title" placeholder="Post title..." required/>
+        </section>
+        <section class="form_section">
+            <select name="category" class="form_select">
+                <option value="general">General</option>
+                <option value="study tips">Study Tips</option>
+                <option value="project">Project</option>
+                <option value="reflection">Reflection</option>
+            </select>
+        </section>
+        <section class="form_section">
+            <textarea name="content" class="blog_textarea" placeholder="Write your post here..." required></textarea>
+        </section>
+        <button type="submit" class="btn_login">Publish Post</button>
+    </form>
+    <div class="back_div">
+        <a href="{{ url_for('blog') }}" class="btn_back">&#8592; Back to Blog</a>
+    </div>
+{% endblock %}

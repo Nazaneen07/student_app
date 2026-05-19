@@ -1,8 +1,49 @@
 {% extends 'base.html' %}
 {% block sitetitle %}Upload Notes{% endblock %}
 {% block content %}
-    <h1 class="title">Upload Notes</h1>
-    <p class="subtitle">Coming soon &mdash; image upload feature</p>
+    <h1 class="title">&#128248; Upload Notes</h1>
+    <p class="subtitle">Store and organize your note images</p>
+
+    <!-- upload form -->
+    <div class="upload_form_div">
+        <input type="file" id="imageInput" accept="image/*" required/>
+        <select id="subjectInput" class="form_select">
+            <option value="general">General</option>
+            <option value="math">Math</option>
+            <option value="science">Science</option>
+            <option value="english">English</option>
+            <option value="cs">Computer Science</option>
+        </select>
+        <button class="btn_login" id="uploadBtn">Upload</button>
+    </div>
+    <p id="upload_message"></p>
+
+    <!-- flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p class="flash_msg">{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- image gallery -->
+    <h2 class="subtitle">My Notes Gallery</h2>
+    <div class="gallery" id="gallery">
+        {% if images %}
+            {% for img in images %}
+                <div class="card">
+                    <img src="{{ url_for('static', filename='uploads/' + img.filename) }}" alt="{{ img.filename }}"/>
+                    <p class="card_label">{{ img.subject }}</p>
+                    <a href="{{ url_for('static', filename='uploads/' + img.filename) }}" download class="btn_back card_btn">&#8659; Download</a>
+                    <a href="{{ url_for('delete_image', image_id=img.id) }}" class="btn_delete card_btn">&#128465; Delete</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no_items">No images uploaded yet!</p>
+        {% endif %}
+    </div>
+
     <div class="back_div">
         <a href="{{ url_for('dashboard') }}" class="btn_back">&#8592; Back to Dashboard</a>
     </div>
