@@ -1,5 +1,5 @@
 # Student Learning Management App
-**Nazaneen Baguaei | Spring 2026 | Queensborough Community College | ET721**
+**Nazaneen Baguaei | Spring 2026 | Queensborough Community College | 2026**
 
 ---
 
